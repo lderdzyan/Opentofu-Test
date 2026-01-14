@@ -76,19 +76,19 @@ jobs:
           name: lambda-folder
           path: lambdas/
 
-      - name: Assume main role
+      - name: Assume federated role
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: ${{ vars.AWS_REGION }}
           role-to-assume: ${{ secrets.AWS_FED_ROLE_ARN }}
 
-
-      - name: Assume deploy role (via federated role)
+      - name: Assume worker role (chained)
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: ${{ vars.AWS_REGION }}
-          role-to-assume: ${{ secrets.AWS_TEST_ROLE_ARN }}
+          role-to-assume: ${{ secrets.AWS_WORKER_ROLE_ARN }}
           role-chaining: true
+
       
       - name: Install OpenTofu
         run: |
