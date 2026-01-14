@@ -46,7 +46,7 @@ jobs:
       - name: Get Lambda names
         id: get-lambdas
         run: |
-          LAMBDAS=$(ls lambda | sed 's/\.zip//g' | paste -sd "," -)
+          LAMBDAS=$(ls lambdas | sed 's/\.zip//g' | paste -sd "," -)
           JSON=$(jq -n --arg val "$LAMBDAS" '$val | split(",")')
           echo "::set-output name=names::$JSON"
 
