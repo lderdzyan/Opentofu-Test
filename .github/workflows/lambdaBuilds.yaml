@@ -99,7 +99,9 @@ jobs:
 
       - name: Set TF_VAR_folder_name
         run: |
-          echo "TF_VAR_folder_name=$VERSION" >> $GITHUB_ENV
+          echo "TF_VAR_state_bucket_name=${{ secrets.STATE_BUCKET_NAME }}" >> $GITHUB_ENV
+          echo "TF_VAR_bucket_name=${{ secrets.BUCKET_NAME }}" >> $GITHUB_ENV
+          echo "TF_VAR_region=${{ vars.AWS_REGION }}" >> $GITHUB_ENV
 
       - name: Set stack name
         run: |
