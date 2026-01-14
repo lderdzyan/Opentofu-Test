@@ -81,7 +81,7 @@ jobs:
         with:
           aws-region: ${{ vars.AWS_REGION }}
           role-to-assume: ${{ secrets.AWS_FED_ROLE_ARN }}
-          role-chaining: true
+
 
       - name: Assume deploy role (chained)
         uses: aws-actions/configure-aws-credentials@v4
