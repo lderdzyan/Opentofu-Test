@@ -81,14 +81,13 @@ jobs:
         with:
           aws-region: ${{ vars.AWS_REGION }}
           role-to-assume: ${{ secrets.AWS_FED_ROLE_ARN }}
-          role-session-name: InfraDeploy
+          role-chaining: true
 
       - name: Assume deploy role (chained)
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: ${{ vars.AWS_REGION }}
           role-to-assume: ${{ secrets.AWS_TEST_ROLE_ARN }}
-          role-session-name: DeployRole
           role-chaining: true
       
       - name: Install OpenTofu
