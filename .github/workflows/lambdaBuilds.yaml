@@ -37,10 +37,10 @@ jobs:
           cp ./.serverless/*zip lambdas
 
       - name: Upload Lambda folder
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: lambda-folder
-          path: lambda/ 
+          path: lambda/
 
       - name: Get Lambda names
         id: get-lambdas
@@ -60,7 +60,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Download Lambda folder
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: lambda-folder
           path: lambda/
