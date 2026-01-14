@@ -56,6 +56,7 @@ jobs:
 
             LAMBDA_ARRAY+=("\"$NAME\"")
           done
+          IFS=,
           JSON="[${LAMBDA_ARRAY[*]}]"
           echo "names=$JSON" >> $GITHUB_OUTPUT
           echo $JSON
