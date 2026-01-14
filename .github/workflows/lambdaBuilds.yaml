@@ -46,14 +46,19 @@ jobs:
       - name: Get Lambda names
         id: get-lambdas
         run: |
-          FILES=$(find lambdas -maxdepth 1 -name "*.zip" -printf "%f\n" | sed 's/\.zip$//')
-          if [ -z "$FILES" ]; then
-            echo "names=[]" >> $GITHUB_OUTPUT
-          else
-            JSON=$(echo "$FILES" | jq -R . | jq -s .)
-            echo "names=$JSON" >> $GITHUB_OUTPUT
-          fi
+          mkdir -p lambdas
+          LAMBDA_ARRAY=()
+          for f in lambdas/*.zip; do
+            [ -e "$f" ] || continue
+            FILE=$(basename "$f")
 
+            NAME="${FILE%.zip}"
+
+            LAMBDA_ARRAY+=("\"$NAME\"")
+          done
+          JSON="[${LAMBDA_ARRAY[*]}]"
+          echo "names=$JSON" >> $GITHUB_OUTPUT
+          echo $JSON
   LambdaToS3:
     needs: buildLambdas
     runs-on: ubuntu-latest
