@@ -83,7 +83,7 @@ jobs:
           role-to-assume: ${{ secrets.AWS_FED_ROLE_ARN }}
 
 
-      - name: Assume deploy role (chained)
+      - name: Assume deploy role (via federated role)
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: ${{ vars.AWS_REGION }}
