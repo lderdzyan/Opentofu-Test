@@ -12,6 +12,7 @@ permissions:
 
 jobs:
   buildLambdas:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     outputs:
       lambda-names: ${{ steps.get-lambdas.outputs.names }}
