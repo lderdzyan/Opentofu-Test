@@ -46,13 +46,11 @@ jobs:
       - name: Get Lambda names
         id: get-lambdas
         run: |
-          mkdir -p lambdas
-          LAMBDAS=$(ls lambdas/*.zip 2>/dev/null | xargs -n1 basename | sed 's/\.zip//g' | paste -sd "," -)
-          if [ -z "$LAMBDAS" ]; then
-            echo "No lambda zips found!"
+          FILES=$(find lambdas -maxdepth 1 -name "*.zip" -printf "%f\n" | sed 's/\.zip$//')
+          if [ -z "$FILES" ]; then
             echo "names=[]" >> $GITHUB_OUTPUT
           else
-            JSON=$(jq -n --arg val "$LAMBDAS" '$val | split(",")')
+            JSON=$(echo "$FILES" | jq -R . | jq -s .)
             echo "names=$JSON" >> $GITHUB_OUTPUT
           fi
 
