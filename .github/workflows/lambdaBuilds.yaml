@@ -34,13 +34,14 @@ jobs:
 
       - name: Make directory for lambdas
         run: |
+          mkdir lamdbas
           cp ./.serverless/*zip lambdas
 
       - name: Upload Lambda folder
         uses: actions/upload-artifact@v4
         with:
           name: lambda-folder
-          path: lambda/
+          path: lambdas/
 
       - name: Get Lambda names
         id: get-lambdas
@@ -63,7 +64,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: lambda-folder
-          path: lambda/
+          path: lambdas/
 
       - name: Assume main role
         uses: aws-actions/configure-aws-credentials@v4
