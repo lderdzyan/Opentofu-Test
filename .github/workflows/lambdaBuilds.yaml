@@ -34,8 +34,8 @@ jobs:
 
       - name: Make directory for lambdas
         run: |
-          mkdir lamdbas
-          cp ./.serverless/*zip lambdas
+          mkdir -p lambdas
+          cp ./.serverless/*.zip lambdas/
 
       - name: Upload Lambda folder
         uses: actions/upload-artifact@v4
