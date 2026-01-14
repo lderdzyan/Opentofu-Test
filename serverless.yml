@@ -1,0 +1,11 @@
+service: myService
+
+provider:
+  name: aws
+package:
+  individually: true
+functions:
+  register:
+    handler: src/register.handler
+  vazgen:
+    handler: src/new.handler
