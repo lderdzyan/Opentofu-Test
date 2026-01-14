@@ -46,9 +46,15 @@ jobs:
       - name: Get Lambda names
         id: get-lambdas
         run: |
-          LAMBDAS=$(ls lambdas | sed 's/\.zip//g' | paste -sd "," -)
-          JSON=$(jq -n --arg val "$LAMBDAS" '$val | split(",")')
-          echo "::set-output name=names::$JSON"
+          mkdir -p lambdas
+          LAMBDAS=$(ls lambdas/*.zip 2>/dev/null | xargs -n1 basename | sed 's/\.zip//g' | paste -sd "," -)
+          if [ -z "$LAMBDAS" ]; then
+            echo "No lambda zips found!"
+            echo "names=[]" >> $GITHUB_OUTPUT
+          else
+            JSON=$(jq -n --arg val "$LAMBDAS" '$val | split(",")')
+            echo "names=$JSON" >> $GITHUB_OUTPUT
+          fi
 
   LambdaToS3:
     needs: buildLambdas
