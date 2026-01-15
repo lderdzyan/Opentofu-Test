@@ -121,12 +121,14 @@ jobs:
 
       - name: Select or create stack
         run: |
+          cd infra/
           tofu init
           export TF_STATE="terraform-${{ matrix.lambda }}.tfstate"
 
       - name: Deploy Lambda
         run: |
           cd infra/
+          tofu init
           tofu apply -auto-approve \
             -var="bucket_name=${{ secrets.BUCKET_NAME }}"
       - name: Deploy Lambda
