@@ -93,8 +93,8 @@ jobs:
       
       - name: Install OpenTofu
         run: |
-          curl -sSf https://raw.githubusercontent.com/open-tofu/opentofu/main/install.sh | sh
-          export PATH="$HOME/.opentofu/bin:$PATH"
+          curl -fsSL https://get.opentofu.org/install-opentofu.sh | sh
+          echo "$HOME/.opentofu/bin" >> $GITHUB_PATH
           tofu version
 
       - name: Set TF_VAR_file_name
