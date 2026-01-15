@@ -126,6 +126,7 @@ jobs:
 
       - name: Deploy Lambda
         run: |
+          cd infra/
           tofu apply -auto-approve \
             -var="bucket_name=${{ secrets.BUCKET_NAME }}"
       - name: Deploy Lambda
