@@ -121,8 +121,8 @@ jobs:
 
       - name: Select or create stack
         run: |
-          tofu stack init "$STACK_NAME" || true
-          tofu stack select "$STACK_NAME"
+          tofu init
+          export TF_STATE="terraform-${{ matrix.lambda }}.tfstate"
 
       - name: Deploy Lambda
         run: |
