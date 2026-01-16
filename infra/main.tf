@@ -6,8 +6,7 @@ resource "aws_s3_object" "upload_file" {
 terraform {
   backend "s3" {
     bucket         = var.state_bucket_name
-    key            = "dev/${var.file_name}/terraform.tfstate"   
-    region         = var.region      
+    key            = "dev/${var.file_name}/terraform.tfstate"      
     encrypt        = true
   }
 }
