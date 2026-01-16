@@ -129,7 +129,9 @@ jobs:
           export TF_VAR_bucket_name=${{ secrets.BUCKET_NAME }}
           export TF_STATE="dev/${{ matrix.lambda }}/terraform.tfstate"
           tofu init
+          tofo plan
       - name: Deploy Lambda
         run: |
+          cd infra
           tofu apply -auto-approve \
             -var="bucket_name=${{ secrets.BUCKET_NAME }}" 
